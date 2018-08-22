@@ -1,8 +1,7 @@
 import numpy as np
 
-
 '''
-A sample of saved data
+A sample of saved iris data
 
 5.1,3.5,1.4,0.2,Iris-setosa
 4.9,3.0,1.4,0.2,Iris-setosa
@@ -12,7 +11,6 @@ A sample of saved data
 5.4,3.9,1.7,0.4,Iris-setosa
 4.6,3.4,1.4,0.3,Iris-setosa
 '''
-
 
 # Load data from file, shuffle and split
 def load_data(file_name, frac_as_test=0.15):
@@ -49,14 +47,16 @@ def knn_classifier(x_tr, y_tr, x_te, y_te, knn=5):
         temp_x_tr = np.copy(x_tr)
         temp_y_tr = y_tr.copy()
         test_x = x_te[i: i+1]
-
+        
+        # Find distance
         temp_x_tr -= test_x
-
         temp_x_tr = np.linalg.norm(temp_x_tr, axis=-1)
-
+        
+        # sort labels according to distances
         temp_y_tr = [y for x, y in sorted(zip(temp_x_tr, temp_y_tr))]
         temp_x_tr = sorted(temp_x_tr)
-
+        
+        # Label Prediction
         predicted = max(set(temp_y_tr[:knn]), key=temp_y_tr[:knn].count)
 
         print("Input test data :", test_x)
