@@ -43,7 +43,7 @@ def normalize(x, y):
 # Calculate cost
 def cost_fn(est, y):
     # MSE
-    cost = np.square(est - y) / (2 * y.shape[0])
+    cost = np.square(est - y) / 2
     return np.sum(cost)
 
 
